@@ -1,0 +1,21 @@
+= ValidatesOverlap
+
+This project rocks and uses MIT-LICENSE.
+
+=== This gem is available only for Rails 3.
+
+=== When this gem should be helpful for you?
+If you are developing Rails 3 app, let say some meeting planner and you can't save records which have time overlap.
+
+=== Using
+
+Add to your gemfile
+  gem 'validates_overlap', :git => 'git@github.com:robinbortlik/validates_overlap.git'
+
+In your model
+
+without scope
+  validates :starts_at, :ends_at, :overlap => true
+
+with scope
+  validates :starts_at, :ends_at, :overlap => {:scope => "user_id"}
