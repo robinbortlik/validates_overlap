@@ -1,25 +1,43 @@
-# encoding: UTF-8
 require 'rubygems'
+require 'bundler'
 begin
-  require 'bundler/setup'
-rescue LoadError
-  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  $stderr.puts e.message
+  $stderr.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
 end
-
 require 'rake'
-require 'rake/rdoctask'
+
+require 'jeweler'
+Jeweler::Tasks.new do |gem|
+  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+  gem.name = "validates_overlap"
+  gem.homepage = "http://github.com/robinbortlik/validates_overlap"
+  gem.license = "MIT"
+  gem.summary = "This gem helps validate records with time overlap."
+  gem.description = "It can be useful when you you are developing some app where you will work with meetings, events etc."
+  gem.email = "robinbortlik@gmail.com"
+  gem.authors = ["Robin Bortlik"]
+  # Include your dependencies below. Runtime dependencies are required when using your gem,
+  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
+  gem.add_runtime_dependency 'rails', '>= 3.0.0'
+  gem.add_development_dependency 'rspec-rails'
+  gem.add_development_dependency 'factory_girl_rails'
+end
+Jeweler::RubygemsDotOrgTasks.new
 
 require 'rspec/core'
 require 'rspec/core/rake_task'
-
 RSpec::Core::RakeTask.new(:spec)
-
 task :default => :spec
 
-Rake::RDocTask.new(:rdoc) do |rdoc|
+require 'rake/rdoctask'
+Rake::RDocTask.new do |rdoc|
+  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'ValidatesOverlap'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README.rdoc')
+  rdoc.title = "validates_overlap #{version}"
+  rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

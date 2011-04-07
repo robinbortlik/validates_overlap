@@ -10,7 +10,7 @@ If you are developing Rails 3 app, let say some meeting planner and you can't sa
 === Using
 
 Add to your gemfile
-  gem 'validates_overlap', :git => 'git@github.com:robinbortlik/validates_overlap.git'
+  gem 'validates_overlap'
 
 In your model
 
