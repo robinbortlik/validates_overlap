@@ -40,7 +40,13 @@ class OverlapValidator < ActiveModel::EachValidator
 
   # Prepare attribute name to use in sql conditions created in form 'table_name.attribute_name'
   def attribute_to_sql(attr, record)
-    "#{record.class.name.underscore.pluralize.downcase}.#{attr}"
+    "#{record_table_name(record)}.#{attr}"
+  end
+
+
+  # Get the table name for the record
+  def record_table_name(record)
+    record.class.table_name
   end
 
 
@@ -53,7 +59,11 @@ class OverlapValidator < ActiveModel::EachValidator
   # Generate sql condition for time range cross
   def generate_overlap_sql_conditions(record)
     starts_at_attr, ends_at_attr = attributes_to_sql(record)
-    self.sql_conditions = "#{ends_at_attr} >= :starts_at_value AND #{starts_at_attr} <= :ends_at_value"
+    if record.new_record?
+      self.sql_conditions = "#{ends_at_attr} >= :starts_at_value AND #{starts_at_attr} <= :ends_at_value"
+    else
+      self.sql_conditions = "#{ends_at_attr} >= :starts_at_value AND #{starts_at_attr} <= :ends_at_value AND #{record_table_name(record)}.id != #{record.id}"
+    end
   end
 
 
