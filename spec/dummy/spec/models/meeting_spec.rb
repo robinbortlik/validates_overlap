@@ -1,4 +1,5 @@
-require 'spec_helper'
+require_relative '../../../spec_helper'
+require_relative '../factories/meeting'
 
 describe Meeting do
 
