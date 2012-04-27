@@ -1,3 +1,5 @@
+{<img src="https://secure.travis-ci.org/robinbortlik/validates_overlap.png?branch=master" alt="Build Status" />}[http://travis-ci.org/robinbortlik/validates_overlap]
+
 = ValidatesOverlap
 
 This project rocks and uses MIT-LICENSE.
