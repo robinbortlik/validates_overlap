@@ -1,0 +1,4 @@
+en:
+  errors:
+    messages:
+      overlap: overlaps with another record

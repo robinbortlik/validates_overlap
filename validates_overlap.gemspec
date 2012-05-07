@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/validates_overlap.rb",
     "lib/validates_overlap/overlap_validator.rb",
+    "lib/validates_overlap/locale/en.yml",
     "spec/dummy/Rakefile",
     "spec/dummy/app/controllers/application_controller.rb",
     "spec/dummy/app/helpers/application_helper.rb",

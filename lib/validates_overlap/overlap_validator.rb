@@ -1,3 +1,6 @@
+require 'active_support/i18n'
+I18n.load_path << File.dirname(__FILE__) + '/locale/en.yml'
+
 class OverlapValidator < ActiveModel::EachValidator
 
   attr_accessor :sql_conditions
@@ -9,7 +12,7 @@ class OverlapValidator < ActiveModel::EachValidator
   end
 
   def validate(record)
-    record.errors[attributes.first] << (options[:message] || "is overlapped") if self.find_crossed(record)
+    record.errors.add(attributes.first, :overlap) if self.find_crossed(record)
   end
 
 
