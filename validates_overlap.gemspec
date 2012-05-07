@@ -5,25 +5,26 @@
 
 Gem::Specification.new do |s|
   s.name = "validates_overlap"
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robin Bortlik"]
-  s.date = "2012-04-25"
+  s.date = "2012-05-07"
   s.description = "It can be useful when you you are developing some app where you will work with meetings, events etc."
   s.email = "robinbortlik@gmail.com"
   s.extra_rdoc_files = [
     "README.rdoc"
   ]
   s.files = [
+    ".travis.yml",
     "Gemfile",
     "MIT-LICENSE",
     "README.rdoc",
     "Rakefile",
     "VERSION",
     "lib/validates_overlap.rb",
-    "lib/validates_overlap/overlap_validator.rb",
     "lib/validates_overlap/locale/en.yml",
+    "lib/validates_overlap/overlap_validator.rb",
     "spec/dummy/Rakefile",
     "spec/dummy/app/controllers/application_controller.rb",
     "spec/dummy/app/helpers/application_helper.rb",
