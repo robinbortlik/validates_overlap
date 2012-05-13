@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "validates_overlap"
-  s.version = "0.0.5"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robin Bortlik"]
-  s.date = "2012-05-07"
+  s.date = "2012-05-13"
   s.description = "It can be useful when you you are developing some app where you will work with meetings, events etc."
   s.email = "robinbortlik@gmail.com"
   s.extra_rdoc_files = [
@@ -28,7 +28,10 @@ Gem::Specification.new do |s|
     "spec/dummy/Rakefile",
     "spec/dummy/app/controllers/application_controller.rb",
     "spec/dummy/app/helpers/application_helper.rb",
+    "spec/dummy/app/models/end_overlap_meeting.rb",
     "spec/dummy/app/models/meeting.rb",
+    "spec/dummy/app/models/start_end_overlap_meeting.rb",
+    "spec/dummy/app/models/start_overlap_meeting.rb",
     "spec/dummy/app/models/user.rb",
     "spec/dummy/app/models/user_meeting.rb",
     "spec/dummy/app/views/layouts/application.html.erb",
@@ -50,6 +53,9 @@ Gem::Specification.new do |s|
     "spec/dummy/db/migrate/20110406082020_create_meetings.rb",
     "spec/dummy/db/migrate/20110406082053_create_users.rb",
     "spec/dummy/db/migrate/20110407060725_create_user_meetings.rb",
+    "spec/dummy/db/migrate/20120509130956_create_end_overlap_meetings.rb",
+    "spec/dummy/db/migrate/20120509131012_create_start_overlap_meetings.rb",
+    "spec/dummy/db/migrate/20120509131032_create_start_end_overlap_meetings.rb",
     "spec/dummy/db/schema.rb",
     "spec/dummy/public/404.html",
     "spec/dummy/public/422.html",
@@ -63,10 +69,16 @@ Gem::Specification.new do |s|
     "spec/dummy/public/javascripts/rails.js",
     "spec/dummy/public/stylesheets/.gitkeep",
     "spec/dummy/script/rails",
+    "spec/dummy/spec/factories/end_overlap_meeting.rb",
     "spec/dummy/spec/factories/meeting.rb",
+    "spec/dummy/spec/factories/start_end_overlap_meeting.rb",
+    "spec/dummy/spec/factories/start_overlap_meeting.rb",
     "spec/dummy/spec/factories/user.rb",
     "spec/dummy/spec/factories/user_meeting.rb",
+    "spec/dummy/spec/models/end_overlap_meeting_spec.rb",
     "spec/dummy/spec/models/meeting_spec.rb",
+    "spec/dummy/spec/models/start_end_overlap_meeting_spec.rb",
+    "spec/dummy/spec/models/start_overlap_meeting_spec.rb",
     "spec/dummy/spec/models/user_meeting_spec.rb",
     "spec/dummy/spec/models/user_spec.rb",
     "spec/spec_helper.rb",
