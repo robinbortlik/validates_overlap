@@ -62,10 +62,11 @@ class OverlapValidator < ActiveModel::EachValidator
   # Generate sql condition for time range cross
   def generate_overlap_sql_conditions(record)
     starts_at_attr, ends_at_attr = attributes_to_sql(record)
+    main_condition = condition_string(starts_at_attr, ends_at_attr)
     if record.new_record?
-      self.sql_conditions = "#{ends_at_attr} >= :starts_at_value AND #{starts_at_attr} <= :ends_at_value"
+      self.sql_conditions = main_condition
     else
-      self.sql_conditions = "#{ends_at_attr} >= :starts_at_value AND #{starts_at_attr} <= :ends_at_value AND #{record_table_name(record)}.id != #{record.id}"
+      self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.id != #{record.id}"
     end
   end
 
@@ -74,6 +75,14 @@ class OverlapValidator < ActiveModel::EachValidator
   def generate_overlap_sql_values(record)
     starts_at_value, ends_at_value = resolve_values_from_attributes(record)
     self.sql_values = {:starts_at_value => starts_at_value, :ends_at_value => ends_at_value}
+  end
+  
+  # Return the condition string depend on exclude_edges option.
+  def condition_string(starts_at_attr, ends_at_attr)
+    except_option = Array(options[:exclude_edges]).map(&:to_s)
+    starts_at_sign = except_option.include?(starts_at_attr.split(".").last) ? "<" : "<="  
+    ends_at_sign = except_option.include?(ends_at_attr.split(".").last) ? ">" : ">="
+    "#{ends_at_attr} #{ends_at_sign} :starts_at_value AND #{starts_at_attr} #{starts_at_sign} :ends_at_value"
   end
 
 

@@ -21,3 +21,7 @@ without scope
 
 with scope
   validates :starts_at, :ends_at, :overlap => {:scope => "user_id"}
+
+exclude edges
+  validates :starts_at, :ends_at, :overlap => {:exclude_edges => "starts_at"}
+  validates :starts_at, :ends_at, :overlap => {:exclude_edges => ["starts_at", "ends_at"]}
