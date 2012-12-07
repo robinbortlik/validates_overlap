@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509131032) do
+ActiveRecord::Schema.define(:version => 20121207162212) do
 
   create_table "end_overlap_meetings", :force => true do |t|
     t.date     "starts_at"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(:version => 20120509131032) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "positions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "time_slot_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "start_end_overlap_meetings", :force => true do |t|
     t.date     "starts_at"
     t.date     "ends_at"
@@ -35,6 +42,13 @@ ActiveRecord::Schema.define(:version => 20120509131032) do
   end
 
   create_table "start_overlap_meetings", :force => true do |t|
+    t.date     "starts_at"
+    t.date     "ends_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "time_slots", :force => true do |t|
     t.date     "starts_at"
     t.date     "ends_at"
     t.datetime "created_at", :null => false

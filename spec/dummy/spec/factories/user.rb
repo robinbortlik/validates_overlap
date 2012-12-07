@@ -1,3 +1,3 @@
 Factory.define :user do |u|
-      u.name 'John'
+  u.name 'John'
 end
