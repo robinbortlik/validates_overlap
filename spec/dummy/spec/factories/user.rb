@@ -1,3 +1,5 @@
-Factory.define :user do |u|
-  u.name 'John'
+FactoryGirl.define do
+  factory :user do |u|
+    u.name 'John'
+  end
 end
