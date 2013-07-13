@@ -32,7 +32,7 @@ exclude edges
 
 with complicated relation relations
 
-Exaple describes valildatation of user, positions and time slots.
+Example describes valildatation of user, positions and time slots.
 User can't be assigned 2 times on position which is under time slot with time overlap.
 
 
