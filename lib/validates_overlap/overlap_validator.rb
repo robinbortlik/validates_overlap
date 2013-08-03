@@ -15,9 +15,9 @@ class OverlapValidator < ActiveModel::EachValidator
   def validate(record)
     if self.find_crossed(record)
       if record.respond_to? attributes.first
-        record.errors.add(attributes.first, :overlap)
+        record.errors.add(options[:message_title] || attributes.first, options[:message_content] || :overlap)
       else
-        record.errors.add(:base, :overlap)
+        record.errors.add(options[:message_title] || :base, options[:message_content] || :overlap
       end
     end
   end
