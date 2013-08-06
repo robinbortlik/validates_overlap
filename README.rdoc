@@ -29,6 +29,8 @@ exclude edges
   validates :starts_at, :ends_at, :overlap => {:exclude_edges => "starts_at"}
   validates :starts_at, :ends_at, :overlap => {:exclude_edges => ["starts_at", "ends_at"]}
 
+define custom validation key and message
+  validates :starts_at, :ends_at, :overlap => {:message_title => "Some validation title", message_content => "Some validation message"}
 
 with complicated relation relations
 
