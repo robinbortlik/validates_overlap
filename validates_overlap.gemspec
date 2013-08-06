@@ -95,7 +95,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/robinbortlik/validates_overlap"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.3"
+  s.rubygems_version = "2.0.6"
   s.summary = "This gem helps validate records with time overlap."
 
   if s.respond_to? :specification_version then
