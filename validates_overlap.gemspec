@@ -5,21 +5,21 @@
 
 Gem::Specification.new do |s|
   s.name = "validates_overlap"
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robin Bortlik"]
-  s.date = "2013-03-05"
+  s.date = "2013-08-06"
   s.description = "It can be useful when you you are developing some app where you will work with meetings, events etc."
   s.email = "robinbortlik@gmail.com"
   s.extra_rdoc_files = [
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".travis.yml",
     "Gemfile",
     "MIT-LICENSE",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
     "lib/validates_overlap.rb",
@@ -88,17 +88,18 @@ Gem::Specification.new do |s|
     "spec/dummy/spec/models/time_slot_spec.rb",
     "spec/dummy/spec/models/user_meeting_spec.rb",
     "spec/dummy/spec/models/user_spec.rb",
+    "spec/dummy/spec/overlap_validator_spec.rb",
     "spec/spec_helper.rb",
     "validates_overlap.gemspec"
   ]
   s.homepage = "http://github.com/robinbortlik/validates_overlap"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.24"
+  s.rubygems_version = "2.0.3"
   s.summary = "This gem helps validate records with time overlap."
 
   if s.respond_to? :specification_version then
-    s.specification_version = 3
+    s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rails>, [">= 3.0.0"])
@@ -107,6 +108,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<factory_girl_rails>, ["~> 4.2"])
       s.add_development_dependency(%q<bundler>, ["~> 1.2"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8"])
+      s.add_development_dependency(%q<pry>, [">= 0"])
     else
       s.add_dependency(%q<rails>, [">= 3.0.0"])
       s.add_dependency(%q<sqlite3>, ["~> 1.3"])
@@ -114,6 +116,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<factory_girl_rails>, ["~> 4.2"])
       s.add_dependency(%q<bundler>, ["~> 1.2"])
       s.add_dependency(%q<jeweler>, ["~> 1.8"])
+      s.add_dependency(%q<pry>, [">= 0"])
     end
   else
     s.add_dependency(%q<rails>, [">= 3.0.0"])
@@ -122,6 +125,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<factory_girl_rails>, ["~> 4.2"])
     s.add_dependency(%q<bundler>, ["~> 1.2"])
     s.add_dependency(%q<jeweler>, ["~> 1.8"])
+    s.add_dependency(%q<pry>, [">= 0"])
   end
 end
 
