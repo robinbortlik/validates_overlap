@@ -4,7 +4,7 @@
 
 This project rocks and uses MIT-LICENSE.
 
-#### This gem is available only for Rails 3.
+#### This gem is compatible with Rails 3 and 4.
 
 #### When this gem should be helpful for you?
 If you are developing Rails 3 app, let say some meeting planner and you can't save records which have time overlap.
@@ -41,7 +41,7 @@ validates :starts_at, :ends_at, :overlap => {:exclude_edges => ["starts_at", "en
 #### define custom validation key and message
 
 ```ruby
-validates :starts_at, :ends_at, :overlap => {:message_title => "Some validation title", message_content => "Some validation message"}
+validates :starts_at, :ends_at, :overlap => {:message_title => "Some validation title", :message_content => "Some validation message"}
 ```
 
 #### with complicated relation relations
