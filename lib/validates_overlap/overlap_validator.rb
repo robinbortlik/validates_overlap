@@ -17,7 +17,7 @@ class OverlapValidator < ActiveModel::EachValidator
       if record.respond_to? attributes.first
         record.errors.add(options[:message_title] || attributes.first, options[:message_content] || :overlap)
       else
-        record.errors.add(options[:message_title] || :base, options[:message_content] || :overlap
+        record.errors.add(options[:message_title] || :base, options[:message_content] || :overlap)
       end
     end
   end

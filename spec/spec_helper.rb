@@ -5,6 +5,7 @@ require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "rails/test_help"
 require "rspec/rails"
 require "factory_girl_rails"
+require 'pry'
 
 
 ActionMailer::Base.delivery_method = :test
