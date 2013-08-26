@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robin Bortlik"]
-  s.date = "2013-08-06"
+  s.date = "2013-08-26"
   s.description = "It can be useful when you you are developing some app where you will work with meetings, events etc."
   s.email = "robinbortlik@gmail.com"
   s.extra_rdoc_files = [
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
     "spec/dummy/Rakefile",
     "spec/dummy/app/controllers/application_controller.rb",
     "spec/dummy/app/helpers/application_helper.rb",
+    "spec/dummy/app/models/active_meeting.rb",
     "spec/dummy/app/models/end_overlap_meeting.rb",
     "spec/dummy/app/models/meeting.rb",
     "spec/dummy/app/models/position.rb",
@@ -59,6 +60,7 @@ Gem::Specification.new do |s|
     "spec/dummy/db/migrate/20120509131012_create_start_overlap_meetings.rb",
     "spec/dummy/db/migrate/20120509131032_create_start_end_overlap_meetings.rb",
     "spec/dummy/db/migrate/20121207162212_create_time_slot.rb",
+    "spec/dummy/db/migrate/20130826155107_create_active_meetings.rb",
     "spec/dummy/db/schema.rb",
     "spec/dummy/public/404.html",
     "spec/dummy/public/422.html",
@@ -72,6 +74,7 @@ Gem::Specification.new do |s|
     "spec/dummy/public/javascripts/rails.js",
     "spec/dummy/public/stylesheets/.gitkeep",
     "spec/dummy/script/rails",
+    "spec/dummy/spec/factories/active_meeting.rb",
     "spec/dummy/spec/factories/end_overlap_meeting.rb",
     "spec/dummy/spec/factories/meeting.rb",
     "spec/dummy/spec/factories/position.rb",
@@ -80,6 +83,7 @@ Gem::Specification.new do |s|
     "spec/dummy/spec/factories/time_slot.rb",
     "spec/dummy/spec/factories/user.rb",
     "spec/dummy/spec/factories/user_meeting.rb",
+    "spec/dummy/spec/models/active_meetings_spec.rb",
     "spec/dummy/spec/models/end_overlap_meeting_spec.rb",
     "spec/dummy/spec/models/meeting_spec.rb",
     "spec/dummy/spec/models/position_spec.rb",
