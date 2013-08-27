@@ -44,7 +44,7 @@ validates :starts_at, :ends_at, :overlap => {:exclude_edges => ["starts_at", "en
 validates :starts_at, :ends_at, :overlap => {:message_title => "Some validation title", :message_content => "Some validation message"}
 ```
 
-#### with complicated relation relations
+#### with complicated relations
 
 Example describes valildatation of user, positions and time slots.
 User can't be assigned 2 times on position which is under time slot with time overlap.
@@ -58,5 +58,14 @@ class Position < ActiveRecord::Base
       :query_options => {:includes => :time_slot},
       :scope => { "positions.user_id" => proc{|position| position.user_id} }
     }
+end
+```
+
+#### apply named scopes
+
+```ruby
+class ActiveMeeting < ActiveRecord::Base
+  validates :starts_at, :ends_at, :overlap => {:query_options => {:active => true}}
+  scope :active, where(:is_active => true)
 end
 ```
