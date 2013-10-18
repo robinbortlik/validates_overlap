@@ -2,6 +2,8 @@ require 'active_support/i18n'
 I18n.load_path << File.dirname(__FILE__) + '/locale/en.yml'
 
 class OverlapValidator < ActiveModel::EachValidator
+  BEGIN_OF_UNIX_TIME = Time.at(-2147483648).to_datetime
+  END_OF_UNIX_TIME = Time.at(2147483648).to_datetime
 
   attr_accessor :sql_conditions
   attr_accessor :sql_values
@@ -28,8 +30,8 @@ class OverlapValidator < ActiveModel::EachValidator
   # Check if exists at least one record in DB which is crossed with current record
   def find_crossed(record)
     self.scoped_model = record.class
-    self.generate_overlap_sql_conditions(record)
     self.generate_overlap_sql_values(record)
+    self.generate_overlap_sql_conditions(record)
     self.add_attributes(record, options[:scope]) if options && options[:scope].present?
     self.add_query_options(options[:query_options]) if options && options[:query_options].present?
 
@@ -99,7 +101,7 @@ class OverlapValidator < ActiveModel::EachValidator
   # Return hash of values for overlap sql condition
   def generate_overlap_sql_values(record)
     starts_at_value, ends_at_value = resolve_values_from_attributes(record)
-    self.sql_values = {:starts_at_value => starts_at_value, :ends_at_value => ends_at_value}
+    self.sql_values = {:starts_at_value => starts_at_value || BEGIN_OF_UNIX_TIME, :ends_at_value => ends_at_value || END_OF_UNIX_TIME}
   end
 
   # Return the condition string depend on exclude_edges option.
@@ -107,7 +109,10 @@ class OverlapValidator < ActiveModel::EachValidator
     except_option = Array(options[:exclude_edges]).map(&:to_s)
     starts_at_sign = except_option.include?(starts_at_attr.to_s.split(".").last) ? "<" : "<="
     ends_at_sign = except_option.include?(ends_at_attr.to_s.split(".").last) ? ">" : ">="
-    "#{ends_at_attr} #{ends_at_sign} :starts_at_value AND #{starts_at_attr} #{starts_at_sign} :ends_at_value"
+    query = []
+    query << "(#{ends_at_attr} IS NULL OR #{ends_at_attr} #{ends_at_sign} :starts_at_value)"
+    query << "(#{starts_at_attr} IS NULL OR #{starts_at_attr} #{starts_at_sign} :ends_at_value)"
+    query.join(" AND ")
   end
 
 
