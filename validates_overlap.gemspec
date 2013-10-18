@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "validates_overlap"
-  s.version = "0.1.3"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robin Bortlik"]
-  s.date = "2013-08-26"
+  s.date = "2013-10-18"
   s.description = "It can be useful when you you are developing some app where you will work with meetings, events etc."
   s.email = "robinbortlik@gmail.com"
   s.extra_rdoc_files = [
