@@ -17,7 +17,7 @@ describe OverlapValidator do
       subject.stub(:find_crossed){true}
       subject.stub(:options){ {:message_title => :optional_key, :message_content => "Message content"} }
       subject.validate(meeting)
-      meeting.errors.messages.should eq :optional_key => ["Message content"]
+      meeting.errors[:optional_key].should eq ["Message content"]
     end
 
   end
