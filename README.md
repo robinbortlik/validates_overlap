@@ -69,3 +69,18 @@ class ActiveMeeting < ActiveRecord::Base
   scope :active, where(:is_active => true)
 end
 ```
+
+## Rails 4.1 update
+
+If you just upgraded your application to rails 4.1 you can discover some issue with custom scopes. In older versions we suggest to use definition like
+
+```ruby
+  {:overlap => {:query_options => {:active => true}}}
+```
+
+but this code is not longer working. Currently please change your code to
+
+```ruby
+  {:overlap => {:query_options => {:active => nil}}}
+```
+Thanks @supertinou for discovering and fix of this bug.
