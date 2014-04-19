@@ -9,9 +9,9 @@ describe ActiveMeeting do
 
   context "scoping" do
     it "should apply scope" do
-      ActiveMeeting.should_receive(:active).with(true).and_call_original
+      ActiveMeeting.should_receive(:active).and_call_original
       active_meeting = ActiveMeeting.new
-      active_meeting.valid?
+      active_meeting.should be_valid
     end
   end
 
