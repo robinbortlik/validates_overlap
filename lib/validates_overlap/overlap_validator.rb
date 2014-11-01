@@ -1,4 +1,5 @@
 require 'active_support/i18n'
+require 'pry'
 I18n.load_path << File.dirname(__FILE__) + '/locale/en.yml'
 
 class OverlapValidator < ActiveModel::EachValidator
@@ -85,15 +86,19 @@ class OverlapValidator < ActiveModel::EachValidator
     raise "Validation of time range must be defined by 2 attributes" unless attributes.size == 2
   end
 
+  def primary_key(record)
+    record.class.columns.find(&:primary).name
+  end
 
   # Generate sql condition for time range cross
   def generate_overlap_sql_conditions(record)
     starts_at_attr, ends_at_attr = attributes_to_sql(record)
     main_condition = condition_string(starts_at_attr, ends_at_attr)
+    primary_key_name = primary_key(record)
     if record.new_record?
       self.sql_conditions = main_condition
     else
-      self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.id != #{record.id}"
+      self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key_name} != #{record.send(primary_key_name)}"
     end
   end
 
