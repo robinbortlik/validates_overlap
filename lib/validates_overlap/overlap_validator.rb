@@ -1,5 +1,5 @@
 require 'active_support/i18n'
-require 'pry'
+
 I18n.load_path << File.dirname(__FILE__) + '/locale/en.yml'
 
 class OverlapValidator < ActiveModel::EachValidator
