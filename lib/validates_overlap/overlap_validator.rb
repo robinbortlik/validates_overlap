@@ -87,7 +87,7 @@ class OverlapValidator < ActiveModel::EachValidator
   end
 
   def primary_key(record)
-    record.class.columns.find(&:primary).name
+    record.class.primary_key
   end
 
   # Generate sql condition for time range cross
