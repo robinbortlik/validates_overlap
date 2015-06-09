@@ -139,7 +139,13 @@ class OverlapValidator < ActiveModel::EachValidator
   # Add attribute and his value to sql condition
   def add_attribute(record, attr_name, value = nil)
     _value = resolve_scope_value(record, attr_name, value)
-    operator = _value.is_a?(Array) ? " IN (:%s)" : " = :%s"
+    operator = if _value.nil?
+      " IS NULL"
+    elsif _value.is_a?(Array)
+      " IN (:%s)"
+    else
+      " = :%s"
+    end
 
     self.sql_conditions += " AND #{attribute_to_sql(attr_name, record)} #{operator}" % value_attribute_name(attr_name)
     self.sql_values.merge!({:"#{value_attribute_name(attr_name)}" => _value})
