@@ -99,13 +99,14 @@ class OverlapValidator < ActiveModel::EachValidator
     starts_at_attr, ends_at_attr = attributes_to_sql(record)
     main_condition = condition_string(starts_at_attr, ends_at_attr)
     primary_key_name = primary_key(record)
+    key = primary_key_value(primary_key_name, record)
     if record.new_record?
       self.sql_conditions = main_condition
     else
-      if primary_key_value(primary_key_name, record).is_a?String
-        self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key(record)} != '#{primary_key_value(primary_key_name, record)}'"
+      if key.is_a?String
+        self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key(record)} != '#{key}'"
       else
-        self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key(record)} != #{primary_key_value(primary_key_name, record)}"
+        self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key(record)} != #{key}"
       end
     end
   end
