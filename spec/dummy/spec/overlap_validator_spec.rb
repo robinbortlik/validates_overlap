@@ -1,3 +1,4 @@
+require_relative '../spec/factories/secure_meeting'
 describe OverlapValidator do
 
 
@@ -19,6 +20,5 @@ describe OverlapValidator do
       subject.validate(meeting)
       meeting.errors[:optional_key].should eq ["Message content"]
     end
-
   end
 end
