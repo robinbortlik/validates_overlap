@@ -4,7 +4,9 @@ require_relative '../factories/secure_meeting'
 describe SecureMeeting do
   context "A model with a UUID as a primary key" do
     before(:all) do
-      SecureMeeting.delete_all
+      if SecureMeeting.count >= 1 then
+        SecureMeeting.delete_all
+      end
     end
 
     it "updates the relevant record" do
