@@ -111,11 +111,8 @@ class OverlapValidator < ActiveModel::EachValidator
     if record.new_record?
       self.sql_conditions = main_condition
     else
-      if primary_key_type(record) == :string
-        self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key(record)} != '#{key}'"
-      else
-        self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key(record)} != #{key}"
-      end
+      self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key(record)} !="
+      self.sql_conditions +=  primary_key_type(record) == :string ? "'#{key}'" : key.to_s
     end
   end
 
