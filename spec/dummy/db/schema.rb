@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20150707155107) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "secure_meetings", primary_key: "identifier", force: :cascade do |t|
+  create_table "secure_meetings", force: :cascade do |t|
     t.date     "starts_at"
     t.date     "ends_at"
     t.datetime "created_at"

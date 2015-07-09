@@ -94,12 +94,8 @@ class OverlapValidator < ActiveModel::EachValidator
     record.send(primary_key_name)
   end
 
-  def primary_key_type(record)
-    column_type(record.class,record.class.primary_key).to_sym
-  end
-
-  def column_type(model, name)
-   model.columns.detect { |c| c.name == name.to_s }.try(:type)
+  def primary_key_type(primary_key_name, record)
+    record.class.for_attribute(primary_key_name)
   end
 
   # Generate sql condition for time range cross
@@ -112,7 +108,7 @@ class OverlapValidator < ActiveModel::EachValidator
       self.sql_conditions = main_condition
     else
       self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key(record)} !="
-      self.sql_conditions +=  primary_key_type(record) == :string ? "'#{key}'" : key.to_s
+      self.sql_conditions +=   key.is_a?(String) ? "'#{key}'" : key.to_s
     end
   end
 
