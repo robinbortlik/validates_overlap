@@ -90,18 +90,23 @@ class OverlapValidator < ActiveModel::EachValidator
     record.class.primary_key
   end
 
+  def primary_key_value(primary_key_name, record)
+    record.send(primary_key_name)
+  end
+
   # Generate sql condition for time range cross
   def generate_overlap_sql_conditions(record)
     starts_at_attr, ends_at_attr = attributes_to_sql(record)
     main_condition = condition_string(starts_at_attr, ends_at_attr)
     primary_key_name = primary_key(record)
+    key = primary_key_value(primary_key_name, record)
     if record.new_record?
       self.sql_conditions = main_condition
     else
-      self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key_name} != #{record.send(primary_key_name)}"
+      self.sql_conditions = "#{main_condition} AND #{record_table_name(record)}.#{primary_key(record)} !="
+      self.sql_conditions +=   key.is_a?(String) ? "'#{key}'" : key.to_s
     end
   end
-
 
   # Return hash of values for overlap sql condition
   def generate_overlap_sql_values(record)
