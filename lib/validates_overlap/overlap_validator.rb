@@ -165,7 +165,7 @@ class OverlapValidator < ActiveModel::EachValidator
     if value
       value.is_a?(Proc) ? value.call(record) : value
     else
-      record.send(:"#{attr_name}")
+      record.read_attribute(attr_name)
     end
   end
 
