@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "validates_overlap"
-  s.version = "0.5.1"
+  s.version = File.read('VERSION')
 
   s.authors = ["Robin Bortlik"]
   s.date = "2013-10-18"
