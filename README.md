@@ -38,6 +38,12 @@ validates :starts_at, :ends_at, :overlap => {:exclude_edges => "starts_at"}
 validates :starts_at, :ends_at, :overlap => {:exclude_edges => ["starts_at", "ends_at"]}
 ```
 
+#### shift edges
+
+```ruby
+validates :starts_at, :ends_at, :overlap => {:start_shift => -1.day, :end_shift => 1.day}
+```
+
 #### define custom validation key and message
 
 ```ruby
