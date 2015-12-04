@@ -111,6 +111,8 @@ class OverlapValidator < ActiveModel::EachValidator
   # Return hash of values for overlap sql condition
   def generate_overlap_sql_values(record)
     starts_at_value, ends_at_value = resolve_values_from_attributes(record)
+    starts_at_value += options.fetch(:start_shift) { 0 } if starts_at_value && options
+    ends_at_value += options.fetch(:end_shift) { 0 } if ends_at_value && options
     self.sql_values = {:starts_at_value => starts_at_value || BEGIN_OF_UNIX_TIME, :ends_at_value => ends_at_value || END_OF_UNIX_TIME}
   end
 
