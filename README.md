@@ -76,7 +76,7 @@ class ActiveMeeting < ActiveRecord::Base
 end
 ```
 
-## Rails 4.1 update
+## Rails 4.1 and 4.2 update
 
 If you just upgraded your application to rails 4.1 you can discover some issue with custom scopes. In older versions we suggest to use definition like
 
