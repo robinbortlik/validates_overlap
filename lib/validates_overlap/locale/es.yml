@@ -1,0 +1,4 @@
+es:
+  errors:
+    messages:
+      overlap: coincide con otro registro
