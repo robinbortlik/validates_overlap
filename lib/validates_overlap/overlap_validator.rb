@@ -159,7 +159,7 @@ class OverlapValidator < ActiveModel::EachValidator
   end
 
   def value_attribute_name(attr_name)
-    name = attr_name.to_s.include?(".") ? attr_name.to_s.gsub(".", "_") : attr_name
+    name = attr_name.to_s.include?(".") ? attr_name.to_s.gsub(".", "_") : attr_name.to_s
     name + "_value"
   end
 
