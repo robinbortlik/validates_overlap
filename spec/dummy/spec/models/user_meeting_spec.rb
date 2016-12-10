@@ -2,37 +2,34 @@ require_relative '../../../spec_helper'
 require_relative '../factories/user_meeting'
 
 describe UserMeeting do
-
-  before(:all) do
-    UserMeeting.delete_all
-  end
-
-  it "create johns meeting" do
-    lambda {
+  it 'create johns meeting' do
+    expect do
       FactoryGirl.create(:johns_meeting)
-    }.should change(UserMeeting, :count).by(1)
+    end.to change(UserMeeting, :count).by(1)
   end
 
-  context "Validation with scope" do
+  context 'Validation with scope' do
+    before do
+      FactoryGirl.create(:johns_meeting)
+    end
 
     OVERLAP_TIME_RANGES.each do |description, time_range|
       it "is not valid if exists johns meeting which #{description}" do
-        meeting = FactoryGirl.build(:johns_meeting, :starts_at => time_range.first, :ends_at => time_range.last)
-        meeting.should_not be_valid
-        meeting.errors[:starts_at].should_not be_empty
-        meeting.errors[:ends_at].should be_empty
+        meeting = FactoryGirl.build(:johns_meeting, starts_at: time_range.first, ends_at: time_range.last)
+        expect(UserMeeting.count).to eq 1
+        expect(meeting).not_to be_valid
+        expect(meeting.errors[:starts_at]).not_to be_empty
+        expect(meeting.errors[:ends_at]).to be_empty
       end
     end
 
     OVERLAP_TIME_RANGES.each do |description, time_range|
       it "is valid if exists johns meeting which #{description}" do
-        meeting = FactoryGirl.build(:peters_meeting, :starts_at => time_range.first, :ends_at => time_range.last)
-        meeting.should be_valid
-        meeting.errors[:starts_at].should be_empty
-        meeting.errors[:ends_at].should be_empty
+        meeting = FactoryGirl.build(:peters_meeting, starts_at: time_range.first, ends_at: time_range.last)
+        expect(meeting).to be_valid
+        expect(meeting.errors[:starts_at]).to be_empty
+        expect(meeting.errors[:ends_at]).to be_empty
       end
     end
-
   end
-
 end
