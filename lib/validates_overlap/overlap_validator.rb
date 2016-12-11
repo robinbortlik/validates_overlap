@@ -18,8 +18,11 @@ class OverlapValidator < ActiveModel::EachValidator
 
   def validate(record)
     initialize_query(record, options)
-    if crossed_exists?
-      record.instance_variable_set(:@overlapped_records, get_crossed)
+    if overlapped_exists?
+      if options[:load_overlapped]
+        record.instance_variable_set(:@overlapped_records, get_overlapped)
+      end
+
       if record.respond_to? attributes.first
         record.errors.add(options[:message_title] || attributes.first, options[:message_content] || :overlap)
       else
@@ -38,12 +41,12 @@ class OverlapValidator < ActiveModel::EachValidator
     add_query_options(options[:query_options]) if options && options[:query_options].present?
   end
 
-  # Check if exists at least one record in DB which is crossed with current record
-  def crossed_exists?
+  # Check if exists at least one record in DB which is overlapped with current record
+  def overlapped_exists?
     scoped_model.exists?([sql_conditions, sql_values])
   end
 
-  def get_crossed
+  def get_overlapped
     scoped_model.where([sql_conditions, sql_values])
   end
 

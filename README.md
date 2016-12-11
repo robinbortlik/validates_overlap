@@ -77,13 +77,17 @@ end
 ```
 
 #### Overlapped records
-If you need to know what records are in conflict, the OverlapValidator set instance variable `@overlapped_records` to the validated object.
-So you  can simply read them by definning your reader like this
+If you need to know what records are in conflict, pass the `{load_overlapped: true }` as validator option and validator will set instance variable `@overlapped_records` to the validated object.
 
 ```ruby
-def overlapped_records
-  @overlapped_records
+class ActiveMeeting < ActiveRecord::Base
+  validates :starts_at, :ends_at, :overlap => {:load_overlapped => true}
+
+  def overlapped_records
+    @overlapped_records || []
+  end
 end
+
 ```
 
 ## Rails 4.1 update
