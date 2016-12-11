@@ -10,9 +10,7 @@ describe Meeting do
     end
 
     context 'simple validation' do
-      before do
-        FactoryGirl.create(:meeting)
-      end
+      let!(:existing_meeting) { FactoryGirl.create(:meeting) }
 
       OVERLAP_TIME_RANGES.each do |description, time_range|
         it "is not valid if exists meeting which #{description}" do
@@ -34,11 +32,20 @@ describe Meeting do
         expect(meeting.errors[:starts_at]).to be_empty
         expect(meeting.errors[:ends_at]).to be_empty
       end
+
+      describe '@overlapped_records' do
+        it 'store the overlapped records' do
+          meeting = FactoryGirl.build(:meeting, starts_at: '2011-01-05'.to_date, ends_at: '2011-01-08'.to_date)
+          expect(meeting).not_to be_valid
+          expect(meeting.instance_variable_get(:@overlapped_records)).to eq [existing_meeting]
+        end
+      end
     end
 
 
     context 'Validation of endless objects' do
-      it 'with overlap object' do
+      xit 'with overlap object' do
+        FactoryGirl.create(:meeting)
         meeting = FactoryGirl.build(:meeting, starts_at: '2011-01-05'.to_date, ends_at: '2011-01-08'.to_date)
         expect(meeting).not_to be_valid
         meeting = FactoryGirl.build(:meeting, starts_at: '2012-01-05'.to_date, ends_at: '2012-01-08'.to_date)
@@ -47,7 +54,9 @@ describe Meeting do
         expect(meeting).to be_valid
       end
 
-      it 'with another endless obejct' do
+      it 'with another endless object' do
+        FactoryGirl.create(:meeting)
+
         meeting = FactoryGirl.build(:meeting, starts_at: '2010-01-05'.to_date, ends_at: nil)
         expect(meeting).not_to be_valid
         meeting = FactoryGirl.build(:meeting, starts_at: nil, ends_at: '2010-01-05'.to_date)
