@@ -2,42 +2,41 @@ require_relative '../../../spec_helper'
 require_relative '../factories/shift'
 
 describe Meeting do
-
-  context "Validation" do
-    before(:all) do
-      Shift.delete_all
-    end
-
-    it "create meeting" do
-      lambda {
+  context 'Validation' do
+    it 'create meeting' do
+      expect do
         FactoryGirl.create(:shift)
-      }.should change(Shift, :count).by(1)
+      end.to change(Shift, :count).by(1)
     end
 
-    it "is not valid if exists shift within wider range" do
-      shift = FactoryGirl.build(:shift, :starts_at => "2011-01-09".to_date, :ends_at => "2011-01-11".to_date)
-      shift.should_not be_valid
-      shift.errors[:starts_at].should_not be_empty
-      shift.errors[:ends_at].should be_empty
+    context 'validation with shift configuration' do
+      before do
+        FactoryGirl.create(:shift)
+      end
 
-      shift = FactoryGirl.build(:shift, :starts_at => "2011-01-01".to_date, :ends_at => "2011-01-04".to_date)
-      shift.should_not be_valid
-      shift.errors[:starts_at].should_not be_empty
-      shift.errors[:ends_at].should be_empty
+      it 'is not valid if exists shift within wider range' do
+        shift = FactoryGirl.build(:shift, starts_at: '2011-01-09'.to_date, ends_at: '2011-01-11'.to_date)
+        expect(shift).not_to be_valid
+        expect(shift.errors[:starts_at]).not_to be_empty
+        expect(shift.errors[:ends_at]).to be_empty
+
+        shift = FactoryGirl.build(:shift, starts_at: '2011-01-01'.to_date, ends_at: '2011-01-04'.to_date)
+        expect(shift).not_to be_valid
+        expect(shift.errors[:starts_at]).not_to be_empty
+        expect(shift.errors[:ends_at]).to be_empty
+      end
+
+      it ' validate object which has not got overlap' do
+        shift = FactoryGirl.build(:shift, starts_at: '2011-01-10'.to_date, ends_at: '2011-01-11'.to_date)
+        expect(shift).to be_valid
+        expect(shift.errors[:starts_at]).to be_empty
+        expect(shift.errors[:ends_at]).to be_empty
+
+        shift = FactoryGirl.build(:shift, starts_at: '2011-01-01'.to_date, ends_at: '2011-01-02'.to_date)
+        expect(shift).to be_valid
+        expect(shift.errors[:starts_at]).to be_empty
+        expect(shift.errors[:ends_at]).to be_empty
+      end
     end
-
-    it " validate object which has not got overlap" do
-      shift = FactoryGirl.build(:shift, :starts_at => "2011-01-10".to_date, :ends_at => "2011-01-11".to_date)
-      shift.should be_valid
-      shift.errors[:starts_at].should be_empty
-      shift.errors[:ends_at].should be_empty
-
-      shift = FactoryGirl.build(:shift, :starts_at => "2011-01-01".to_date, :ends_at => "2011-01-02".to_date)
-      shift.should be_valid
-      shift.errors[:starts_at].should be_empty
-      shift.errors[:ends_at].should be_empty
-    end
-
   end
-
 end

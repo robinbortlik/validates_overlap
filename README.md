@@ -4,10 +4,10 @@
 
 This project rocks and uses MIT-LICENSE.
 
-#### This gem is compatible with Rails 3 and 4.
+#### This gem is compatible with Rails 3, 4, 5.
 
 #### When this gem should be helpful for you?
-If you are developing Rails 3 app, let say some meeting planner and you can't save records which have time overlap.
+Ideal solution for booking applications where you want to make sure, that one place can be booked only once in specific time period.
 
 #### Using
 
@@ -74,6 +74,20 @@ class ActiveMeeting < ActiveRecord::Base
   validates :starts_at, :ends_at, :overlap => {:query_options => {:active => nil}}
   scope :active, where(:is_active => true)
 end
+```
+
+#### Overlapped records
+If you need to know what records are in conflict, pass the `{load_overlapped: true }` as validator option and validator will set instance variable `@overlapped_records` to the validated object.
+
+```ruby
+class ActiveMeeting < ActiveRecord::Base
+  validates :starts_at, :ends_at, :overlap => {:load_overlapped => true}
+
+  def overlapped_records
+    @overlapped_records || []
+  end
+end
+
 ```
 
 ## Rails 4.1 update
