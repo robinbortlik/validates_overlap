@@ -150,7 +150,7 @@ class OverlapValidator < ActiveModel::EachValidator
 
   # Add attribute and his value to sql condition
   def add_attribute(record, attr_name, value = nil)
-    _value = resolve_scope_value(record, attr_name, value)
+    _value = resolve_attribute_value(record, attr_name, value)
     operator = if _value.nil?
                  ' IS NULL'
                elsif _value.is_a?(Array)
@@ -168,12 +168,26 @@ class OverlapValidator < ActiveModel::EachValidator
     name + '_value'
   end
 
-  def resolve_scope_value(record, attr_name, value = nil)
+  def resolve_attribute_value(record, attr_name, value = nil)
     if value
       value.is_a?(Proc) ? value.call(record) : value
     else
-      record.read_attribute(attr_name)
+      value = record.read_attribute(attr_name)
+
+      if is_enum_attribute?(record, attr_name)
+        value = record.class.defined_enums[attr_name][value]
+      end
+
+      value
     end
+  end
+
+  def is_enum_attribute?(record, attr_name)
+    implement_enum? && record.class.defined_enums[attr_name].present?
+  end
+
+  def implement_enum?
+    (ActiveRecord::VERSION::MAJOR > 5) || (ActiveRecord::VERSION::MAJOR > 4 && ActiveRecord::VERSION::MINOR > 1)
   end
 
   # Allow to use scope, joins, includes methods before querying

@@ -18,7 +18,8 @@ Rails.backtrace_cleaner.remove_silencers!
 ActiveRecord::Migrator.migrate File.expand_path('../dummy/db/migrate/', __FILE__)
 
 # Load support files
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+FactoryGirl.definition_file_paths << File.join(File.dirname(__FILE__), '/dummy/spec/factories')
+FactoryGirl.find_definitions
 
 RSpec.configure do |config|
   # Remove this line if you don't want RSpec's should and should_not

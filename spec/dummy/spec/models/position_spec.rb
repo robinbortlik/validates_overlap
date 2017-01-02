@@ -1,7 +1,4 @@
-require_relative '../../../spec_helper'
-require_relative '../factories/position'
-require_relative '../factories/time_slot'
-require_relative '../factories/user'
+require "#{File.dirname(__FILE__)}/../../../spec_helper"
 
 describe Position do
   it 'create position' do

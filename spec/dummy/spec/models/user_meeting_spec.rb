@@ -1,5 +1,4 @@
-require_relative '../../../spec_helper'
-require_relative '../factories/user_meeting'
+require "#{File.dirname(__FILE__)}/../../../spec_helper"
 
 describe UserMeeting do
   it 'create johns meeting' do
