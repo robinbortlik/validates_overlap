@@ -3,6 +3,7 @@ require "#{File.dirname(__FILE__)}/../../../spec_helper"
 describe DocumentWithEnum do
   context '2 overlapping documents with same kind' do
     it 'are invalid' do
+
       document_1 = FactoryGirl.create(
         :document_with_enum,
         kind: :draft,

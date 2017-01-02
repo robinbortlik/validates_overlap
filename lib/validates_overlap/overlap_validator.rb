@@ -183,7 +183,11 @@ class OverlapValidator < ActiveModel::EachValidator
   end
 
   def is_enum_attribute?(record, attr_name)
-    record.class.defined_enums[attr_name].present?
+    implement_enum? && record.class.defined_enums[attr_name].present?
+  end
+
+  def implement_enum?
+    (ActiveRecord::VERSION::MAJOR > 5) || (ActiveRecord::VERSION::MAJOR > 4 && ActiveRecord::VERSION::MINOR > 1)
   end
 
   # Allow to use scope, joins, includes methods before querying
