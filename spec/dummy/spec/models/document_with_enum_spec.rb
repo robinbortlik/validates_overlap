@@ -42,4 +42,12 @@ describe DocumentWithEnum do
       expect(document_2).to be_valid
     end
   end
+
+  describe '#kind' do
+    it 'save and read attribute properly' do
+      docuemnt = FactoryGirl.create(:document_with_enum, kind: :contract)
+      docuemnt.reload
+      expect(docuemnt.kind).to eq :contract
+    end
+  end
 end
