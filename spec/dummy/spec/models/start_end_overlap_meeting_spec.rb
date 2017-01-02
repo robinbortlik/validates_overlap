@@ -1,5 +1,4 @@
-require_relative '../../../spec_helper'
-require_relative '../factories/start_end_overlap_meeting'
+require "#{File.dirname(__FILE__)}/../../../spec_helper"
 
 describe StartEndOverlapMeeting do
   it 'create meeting' do

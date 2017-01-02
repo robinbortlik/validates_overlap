@@ -1,5 +1,4 @@
-require_relative '../../../spec_helper'
-require_relative '../factories/user'
+require "#{File.dirname(__FILE__)}/../../../spec_helper"
 
 describe User do
   it 'create user' do

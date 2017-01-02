@@ -1,5 +1,4 @@
-require_relative '../../../spec_helper'
-require_relative '../factories/secure_meeting'
+require "#{File.dirname(__FILE__)}/../../../spec_helper"
 
 describe SecureMeeting do
   context 'A model with a UUID as a primary key' do

@@ -1,5 +1,4 @@
-require_relative '../../../spec_helper'
-require_relative '../factories/shift'
+require "#{File.dirname(__FILE__)}/../../../spec_helper"
 
 describe Meeting do
   context 'Validation' do
