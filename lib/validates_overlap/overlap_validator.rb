@@ -187,7 +187,7 @@ class OverlapValidator < ActiveModel::EachValidator
   end
 
   def implement_enum?
-    (ActiveRecord::VERSION::MAJOR > 5) || (ActiveRecord::VERSION::MAJOR > 4 && ActiveRecord::VERSION::MINOR > 1)
+    (ActiveRecord::VERSION::MAJOR >= 5) || (ActiveRecord::VERSION::MAJOR > 4 && ActiveRecord::VERSION::MINOR > 1)
   end
 
   # Allow to use scope, joins, includes methods before querying

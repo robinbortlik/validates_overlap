@@ -3,7 +3,7 @@ class DocumentWithEnum < ActiveRecord::Base
   KINDS = [:contract, :fact, :draft]
 
 
-  if (ActiveRecord::VERSION::MAJOR > 5) || (ActiveRecord::VERSION::MAJOR > 4 && ActiveRecord::VERSION::MINOR > 1)
+  if (ActiveRecord::VERSION::MAJOR >= 5) || (ActiveRecord::VERSION::MAJOR > 4 && ActiveRecord::VERSION::MINOR > 1)
     enum kind: KINDS
   else
     # Simulate enum functionality implemented in rails 4.1 and 5
