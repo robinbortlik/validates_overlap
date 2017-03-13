@@ -47,7 +47,7 @@ describe DocumentWithEnum do
     it 'save and read attribute properly' do
       docuemnt = FactoryGirl.create(:document_with_enum, kind: :contract)
       docuemnt.reload
-      expect(docuemnt.kind).to eq :contract
+      expect(docuemnt.kind.to_s).to eq "contract"
     end
   end
 end
