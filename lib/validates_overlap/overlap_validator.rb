@@ -24,7 +24,13 @@ class OverlapValidator < ActiveModel::EachValidator
       end
 
       if record.respond_to? attributes.first
-        record.errors.add(options[:message_title] || attributes.first, options[:message_content] || :overlap)
+        if options[:message_title].is_a?(Array)
+          options[:message_title].each do |key|
+            record.errors.add(key, options[:message_content] || :overlap)
+          end
+        else
+          record.errors.add(options[:message_title] || attributes.first, options[:message_content] || :overlap)
+        end
       else
         record.errors.add(options[:message_title] || :base, options[:message_content] || :overlap)
       end
