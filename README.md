@@ -31,7 +31,7 @@ validates :starts_at, :ends_at, :overlap => true
 validates :starts_at, :ends_at, :overlap => {:scope => "user_id"}
 ```
 
-#### exclude edges
+#### exclude edge(s)
 
 ```ruby
 validates :starts_at, :ends_at, :overlap => {:exclude_edges => "starts_at"}
@@ -44,10 +44,11 @@ validates :starts_at, :ends_at, :overlap => {:exclude_edges => ["starts_at", "en
 validates :starts_at, :ends_at, :overlap => {:start_shift => -1.day, :end_shift => 1.day}
 ```
 
-#### define custom validation key and message
+#### define custom validation key(s) and message
 
 ```ruby
 validates :starts_at, :ends_at, :overlap => {:message_title => "Some validation title", :message_content => "Some validation message"}
+validates :starts_at, :ends_at, :overlap => {:message_title => [:start_at, :end_at], :message_content => "Some validation message"}
 ```
 
 #### with complicated relations
