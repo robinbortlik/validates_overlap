@@ -40,7 +40,7 @@ class OverlapValidator < ActiveModel::EachValidator
   protected
 
   def initialize_query(record, options = {})
-    self.scoped_model = options[:scoped_model].safe_constantize || record.class
+    self.scoped_model = options[:scoped_model].present? ? options[:scoped_model].constantize : record.class
     generate_overlap_sql_values(record)
     generate_overlap_sql_conditions(record)
     add_attributes(record, options[:scope]) if options && options[:scope].present?
