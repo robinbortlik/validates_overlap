@@ -189,7 +189,7 @@ class OverlapValidator < ActiveModel::EachValidator
   end
 
   def is_enum_attribute?(record, attr_name)
-    implement_enum? && record.class.defined_enums[attr_name].present?
+    implement_enum? && record.class.defined_enums[attr_name.to_s].present?
   end
 
   def implement_enum?
