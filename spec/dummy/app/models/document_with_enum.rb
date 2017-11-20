@@ -7,7 +7,7 @@ class DocumentWithEnum < ActiveRecord::Base
     enum kind: KINDS
   else
     # Simulate enum functionality implemented in rails 4.1 and 5
-    # For rails version < 4.1 we always read read attribute by using read_attribute method
+    # For rails version < 4.1 we always read attribute by using read_attribute method
     def kind=(value)
       write_attribute(:kind, KINDS.index(value))
     end

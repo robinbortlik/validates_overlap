@@ -8,3 +8,4 @@ gemfile:
   - Gemfile.rails41
   - Gemfile.rails42
   - Gemfile.rails50
+script: bundle exec rspec spec

@@ -18,6 +18,7 @@ class OverlapValidator < ActiveModel::EachValidator
 
   def validate(record)
     initialize_query(record, options)
+
     if overlapped_exists?
       if options[:load_overlapped]
         record.instance_variable_set(:@overlapped_records, get_overlapped)

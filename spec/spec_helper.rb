@@ -4,7 +4,7 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 require 'rails/test_help'
 require 'rspec/rails'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'database_cleaner'
 require 'pry'
 
@@ -18,8 +18,8 @@ Rails.backtrace_cleaner.remove_silencers!
 ActiveRecord::Migrator.migrate File.expand_path('../dummy/db/migrate/', __FILE__)
 
 # Load support files
-FactoryGirl.definition_file_paths << File.join(File.dirname(__FILE__), '/dummy/spec/factories')
-FactoryGirl.find_definitions
+FactoryBot.definition_file_paths << File.join(File.dirname(__FILE__), '/dummy/spec/factories')
+FactoryBot.find_definitions
 
 RSpec.configure do |config|
   # Remove this line if you don't want RSpec's should and should_not
