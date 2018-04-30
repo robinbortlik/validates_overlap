@@ -1,0 +1,4 @@
+ru:
+  errors:
+    messages:
+      overlap: пересекается с другой записью
