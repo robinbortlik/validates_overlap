@@ -1,4 +1,4 @@
-class CreateTimeSlot < ActiveRecord::Migration
+class CreateTimeSlot < ActiveRecord::Migration[6.0]
   def self.up
     create_table :time_slots do |t|
       t.date :starts_at

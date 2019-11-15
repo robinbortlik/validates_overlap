@@ -4,7 +4,7 @@
 
 This project rocks and uses MIT-LICENSE.
 
-#### This gem is compatible with Rails 3, 4, 5.
+#### This gem is compatible with Rails 6. If you are looking for version compatible with Rails 3,4,5 please use version 0.8.6 .
 
 #### When this gem should be helpful for you?
 Ideal solution for booking applications where you want to make sure, that one place can be booked only once in specific time period.
@@ -62,7 +62,7 @@ class Position < ActiveRecord::Base
   belongs_to :user
   validates "time_slots.starts_at", "time_slots.ends_at",
     :overlap => {
-      :query_options => {:includes => :time_slot},
+      :query_options => {:joins => :time_slot},
       :scope => { "positions.user_id" => proc{|position| position.user_id} }
     }
 end
@@ -90,18 +90,3 @@ class ActiveMeeting < ActiveRecord::Base
 end
 
 ```
-
-## Rails 4.1 update
-
-If you just upgraded your application to rails 4.1 you can discover some issue with custom scopes. In older versions we suggest to use definition like
-
-```ruby
-  {:overlap => {:query_options => {:active => true}}}
-```
-
-but this code is not longer working. Currently please change your code to
-
-```ruby
-  {:overlap => {:query_options => {:active => nil}}}
-```
-Thanks @supertinou for discovering and fix of this bug.

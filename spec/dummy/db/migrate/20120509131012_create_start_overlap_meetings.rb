@@ -1,4 +1,4 @@
-class CreateStartOverlapMeetings < ActiveRecord::Migration
+class CreateStartOverlapMeetings < ActiveRecord::Migration[6.0]
   def self.up
     create_table :start_overlap_meetings do |t|
       t.date :starts_at

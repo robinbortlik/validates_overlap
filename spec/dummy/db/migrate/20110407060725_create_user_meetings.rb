@@ -1,4 +1,4 @@
-class CreateUserMeetings < ActiveRecord::Migration
+class CreateUserMeetings < ActiveRecord::Migration[6.0]
   def self.up
     create_table :user_meetings do |t|
       t.integer :user_id

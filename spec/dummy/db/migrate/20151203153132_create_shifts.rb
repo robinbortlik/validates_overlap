@@ -1,4 +1,4 @@
-class CreateShifts < ActiveRecord::Migration
+class CreateShifts < ActiveRecord::Migration[6.0]
   def self.up
     create_table :shifts do |t|
       t.date :starts_at

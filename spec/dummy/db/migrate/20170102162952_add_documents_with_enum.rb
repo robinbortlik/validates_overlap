@@ -1,4 +1,4 @@
-class AddDocumentsWithEnum < ActiveRecord::Migration
+class AddDocumentsWithEnum < ActiveRecord::Migration[6.0]
   def self.up
     create_table :documents_with_enum do |t|
       t.date :valid_from
