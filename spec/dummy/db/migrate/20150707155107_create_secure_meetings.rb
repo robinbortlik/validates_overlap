@@ -1,4 +1,4 @@
-class CreateSecureMeetings < ActiveRecord::Migration
+class CreateSecureMeetings < ActiveRecord::Migration[6.0]
   def self.up
     create_table :secure_meetings, id: false do |t|
       t.primary_key :id

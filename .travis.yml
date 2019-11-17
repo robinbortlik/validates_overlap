@@ -1,10 +1,6 @@
 language: ruby
 rvm:
-  - 2.2.2
+  - 2.5.0
 gemfile:
-  - Gemfile.rails30
-  - Gemfile.rails32
-  - Gemfile.rails40
-  - Gemfile.rails41
-  - Gemfile.rails42
-  - Gemfile.rails50
+  - Gemfile.rails60
+script: bundle exec rspec

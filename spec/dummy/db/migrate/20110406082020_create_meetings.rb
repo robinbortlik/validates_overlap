@@ -1,4 +1,4 @@
-class CreateMeetings < ActiveRecord::Migration
+class CreateMeetings < ActiveRecord::Migration[6.0]
   def self.up
     create_table :meetings do |t|
       t.date :starts_at
